@@ -287,6 +287,9 @@ input[type="range"].heart-slider {
   appearance: none;
   background: transparent;
   cursor: pointer;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
 }
 input[type="range"].heart-slider::-webkit-slider-runnable-track {
   height: 4px;

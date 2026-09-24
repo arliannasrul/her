@@ -23,22 +23,24 @@ export interface SongItem {
 export const PLAYLIST: SongItem[] = [
   {
     id: 1,
+    title: "Love.",
+    artist: "Wave to Earth",
+    url: "/music/love.mp3", // Simpan file lagu ke: public/music/lagu3.mp3
+  },
+   {
+    id: 2,
+    title: "About You",
+    artist: "1975",
+    url: "/music/About You.mp3", // Simpan file lagu ke: public/music/lagu2.mp3
+  },
+  {
+    id: 3,
     title: "Shape of My Heart",
     artist: "Backstreet Boys",
     url: "/music/Shape of My Heart.mp3", // Simpan file lagu ke: public/music/lagu1.mp3
   },
-  {
-    id: 2,
-    title: "Lagu Kedua",
-    artist: "Special for Bae",
-    url: "/music/lagu2.mp3", // Simpan file lagu ke: public/music/lagu2.mp3
-  },
-  {
-    id: 3,
-    title: "Lagu Ketiga",
-    artist: "Special for Bae",
-    url: "/music/lagu3.mp3", // Simpan file lagu ke: public/music/lagu3.mp3
-  },
+ 
+
 ];
 
 // Fallback untuk backward compatibility

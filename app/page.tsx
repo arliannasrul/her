@@ -40,15 +40,17 @@ export default function Home() {
           {/* Animated Falling Petals Background for sections below Hero */}
           <FallingPetalsBackground />
 
-          <HeroSection />
-          <TimelineSection />
-          <GallerySection />
-          <HerGallerySection />
-          <MiniGame />
-          <LetterClosing />
-          <MusicPlayer />
+          <div data-section="0"><HeroSection /></div>
+          <div data-section="1"><TimelineSection /></div>
+          <div data-section="2"><GallerySection /></div>
+          <div data-section="3"><HerGallerySection /></div>
+          <div data-section="4"><MiniGame /></div>
+          <div data-section="5"><LetterClosing /></div>
         </>
       )}
+
+      {/* Global music player: mounted from start to receive user click gesture, revealed when entered */}
+      <MusicPlayer isVisible={entered} />
     </SmoothScrollProvider>
   );
 }
