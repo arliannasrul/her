@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -10,6 +10,20 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [ballCount, setBallCount] = useState(35);
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setBallCount(mobile ? 35 : 120);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // ── Hero entrance animation ─────────────────────────────────────
   useGSAP(() => {
@@ -29,13 +43,14 @@ export default function HeroSection() {
       style={{ background: "linear-gradient(160deg,#0d0a0e 0%,#1a0a18 50%,#0d0a0e 100%)" }}
     >
       {/* 3D Ballpit interactive background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none md:pointer-events-auto">
         <Ballpit
-          count={130}
+          key={ballCount}
+          count={ballCount}
           gravity={0}
           friction={0.9975}
           wallBounce={1}
-          followCursor
+          followCursor={!isMobile}
           colors={["#c2345a", "#8b1a3e", "#4a1228", "#ff6b8a", "#d4a843", "#f5e6ea"]}
           ambientColor="#ffeef2"
           ambientIntensity={1.2}

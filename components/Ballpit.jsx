@@ -57,6 +57,7 @@ class x {
   #l;
   constructor(e) {
     this.#e = { ...e };
+    this.maxPixelRatio = e.maxPixelRatio ?? 1.5;
     this.#m();
     this.#d();
     this.#p();
@@ -261,10 +262,10 @@ function S(e) {
         document.body.addEventListener('pointerleave', L);
         document.body.addEventListener('click', C);
 
-        document.body.addEventListener('touchstart', TouchStart, { passive: false });
-        document.body.addEventListener('touchmove', TouchMove, { passive: false });
-        document.body.addEventListener('touchend', TouchEnd, { passive: false });
-        document.body.addEventListener('touchcancel', TouchEnd, { passive: false });
+        document.body.addEventListener('touchstart', TouchStart, { passive: true });
+        document.body.addEventListener('touchmove', TouchMove, { passive: true });
+        document.body.addEventListener('touchend', TouchEnd, { passive: true });
+        document.body.addEventListener('touchcancel', TouchEnd, { passive: true });
 
         R = true;
       }
@@ -333,7 +334,6 @@ function L() {
 
 function TouchStart(e) {
   if (e.touches.length > 0) {
-    e.preventDefault();
     A.x = e.touches[0].clientX;
     A.y = e.touches[0].clientY;
 
@@ -354,7 +354,6 @@ function TouchStart(e) {
 
 function TouchMove(e) {
   if (e.touches.length > 0) {
-    e.preventDefault();
     A.x = e.touches[0].clientX;
     A.y = e.touches[0].clientY;
 
@@ -589,7 +588,7 @@ class Z extends d {
     const i = { ...X, ...t };
     const s = new z();
     const n = new p(e, 0.04).fromScene(s).texture;
-    const o = new g();
+    const o = new g(1, 24, 16);
     const r = new Y({ envMap: n, ...i.materialParams });
     r.envMapRotation.x = -Math.PI / 2;
     super(o, r, i.count);
@@ -660,10 +659,12 @@ class Z extends d {
 
 function createBallpit(e, t = {}) {
   try {
+    const isMobileDevice = typeof window !== 'undefined' && (window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches);
     const i = new x({
       canvas: e,
       size: 'parent',
-      rendererOptions: { antialias: true, alpha: true }
+      maxPixelRatio: isMobileDevice ? 1.25 : 1.5,
+      rendererOptions: { antialias: true, alpha: true, powerPreference: 'high-performance' }
     });
     let s;
     i.renderer.toneMapping = v;
@@ -677,7 +678,7 @@ function createBallpit(e, t = {}) {
     const r = new a();
     let c = false;
 
-    e.style.touchAction = 'none';
+    e.style.touchAction = 'pan-y';
     e.style.userSelect = 'none';
     e.style.webkitUserSelect = 'none';
 
