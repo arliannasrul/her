@@ -223,7 +223,9 @@ export default function OpeningModal({ onDone }: Props) {
     }
 
     // Cinematic modal exit with slight delay to enjoy the explosion
-    gsap.to(containerRef.current, {
+    const container = containerRef.current;
+    if (container) container.style.pointerEvents = "none"; // unblock touch immediately
+    gsap.to(container, {
       scale: 1.08,
       opacity: 0,
       duration: 0.7,
