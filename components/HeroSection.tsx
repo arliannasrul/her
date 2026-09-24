@@ -86,7 +86,7 @@ export default function HeroSection() {
               background: "rgba(26, 10, 24, 0.8)",
             }}
           >
-            Written Just For My Bae • Happy Birthday!
+            Written Just For You • Happy Birthday!
           </span>
         </div>
 
