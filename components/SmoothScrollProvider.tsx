@@ -17,7 +17,7 @@ export default function SmoothScrollProvider({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       touchMultiplier: 2,
-      smoothTouch: false,      // use native touch scroll on mobile
+      syncTouch: false,        // use native touch scroll on mobile
       gestureOrientation: "vertical",
     });
 
