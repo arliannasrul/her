@@ -759,6 +759,8 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
 
     const canvas = document.createElement('canvas');
     canvas.className = `${className} w-full h-full block`;
+    // Allow Three.js pointer tracking but don't block native scroll on touch
+    canvas.style.touchAction = 'pan-y';
     container.appendChild(canvas);
 
     try {

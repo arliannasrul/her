@@ -110,6 +110,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Ensure vertical touch scroll always works on mobile */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -118,11 +121,17 @@ body {
   font-family: var(--font-body);
   cursor: none; /* hide default, use custom */
   overflow-x: hidden;
+  /* Prevent horizontal scroll bounce on mobile */
+  overscroll-behavior-x: none;
 }
 
 /* show default cursor on mobile */
 @media (pointer: coarse) {
-  body { cursor: auto; }
+  body {
+    cursor: auto;
+    /* Restore normal touch behavior on mobile */
+    touch-action: pan-y;
+  }
 }
 
 /* ────────────────────────────────────────────────

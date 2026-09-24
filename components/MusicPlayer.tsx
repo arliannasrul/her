@@ -527,12 +527,11 @@ export default function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
       onPointerDown={onDragStart}
       onPointerMove={onDragMove}
       onPointerUp={onDragEnd}
-      onPointerLeave={onDragEnd}
     >
       {/* ── Drag Handle + Header ── */}
       <div
         className="flex items-center gap-2 px-4 pt-3 pb-2"
-        style={{ cursor: "grab" }}
+        style={{ cursor: "grab", touchAction: "none" }}
       >
         {/* Grip icon */}
         <GripHorizontal className="w-3.5 h-3.5 text-rose-300/40 flex-shrink-0" />
