@@ -19,7 +19,7 @@ const NO_COPIES = [
   "Udah, pencet Yess aja yuk, Bae~ 🌹",
 ];
 
-const HEART_COLORS = ["#ff6b8a", "#c2345a", "#ff8da1", "#d4a843", "#ffffff", "#ff4d6d"];
+const HEART_COLORS = ["#ff6b8a", "#c2345a", "#ff8da1", "#d4a843", "#ffffff", "#ff4d6d", "#ff3366", "#f72585"];
 const SVG_HEART = `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 
 function triggerLoveCelebration(buttonRect?: DOMRect) {
@@ -33,12 +33,12 @@ function triggerLoveCelebration(buttonRect?: DOMRect) {
   container.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:hidden;";
   const fragment = document.createDocumentFragment();
 
-  // 1. Radial explosion from the button (24 vector hearts)
-  const burstCount = 24;
+  // 1. Radial explosion from the button (58 vector hearts)
+  const burstCount = 58;
   for (let i = 0; i < burstCount; i++) {
     const el = document.createElement("div");
     const color = HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)];
-    const size = Math.random() * 16 + 18; // 18px to 34px
+    const size = Math.random() * 20 + 16; // 16px to 36px
     el.innerHTML = SVG_HEART;
     el.style.cssText = `
       position: absolute;
@@ -50,45 +50,46 @@ function triggerLoveCelebration(buttonRect?: DOMRect) {
       user-select: none;
       transform: translate(-50%, -50%) scale(0);
       will-change: transform, opacity;
-      filter: drop-shadow(0 0 6px ${color});
+      filter: drop-shadow(0 0 8px ${color});
     `;
     fragment.appendChild(el);
 
     const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * Math.min(window.innerWidth, window.innerHeight) * 0.45 + 70;
+    const distance = Math.random() * Math.min(window.innerWidth, window.innerHeight) * 0.55 + 75;
     const destX = Math.cos(angle) * distance;
-    const destY = Math.sin(angle) * distance - (Math.random() * 100 + 30);
-    const duration = Math.random() * 0.5 + 0.85;
+    const destY = Math.sin(angle) * distance - (Math.random() * 110 + 25);
+    const duration = Math.random() * 0.6 + 0.9;
+    const delay = Math.random() * 0.12;
 
-    gsap.timeline()
+    gsap.timeline({ delay })
       .to(el, {
-        scale: Math.random() * 0.5 + 0.9,
-        duration: 0.15,
-        ease: "back.out(1.8)",
+        scale: Math.random() * 0.6 + 0.9,
+        duration: 0.16,
+        ease: "back.out(2)",
       })
       .to(el, {
         x: destX,
         y: destY,
-        rotation: (Math.random() - 0.5) * 180,
+        rotation: (Math.random() - 0.5) * 260,
         duration: duration,
         ease: "power2.out",
       }, 0)
       .to(el, {
         opacity: 0,
-        scale: 0.3,
-        duration: 0.35,
+        scale: 0.25,
+        duration: 0.38,
         ease: "power1.in",
-      }, duration - 0.35);
+      }, duration - 0.38);
   }
 
-  // 2. Rising love stream (16 vector hearts)
-  const streamCount = 16;
+  // 2. Rising love stream (42 vector hearts)
+  const streamCount = 42;
   for (let i = 0; i < streamCount; i++) {
     const el = document.createElement("div");
     const color = HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)];
     const startX = Math.random() * window.innerWidth;
-    const startY = window.innerHeight + Math.random() * 40;
-    const size = Math.random() * 18 + 16;
+    const startY = window.innerHeight + Math.random() * 50;
+    const size = Math.random() * 22 + 16;
     el.innerHTML = SVG_HEART;
     el.style.cssText = `
       position: absolute;
@@ -100,34 +101,34 @@ function triggerLoveCelebration(buttonRect?: DOMRect) {
       user-select: none;
       transform: translate(-50%, 0) scale(0);
       will-change: transform, opacity;
-      filter: drop-shadow(0 0 6px ${color});
+      filter: drop-shadow(0 0 8px ${color});
     `;
     fragment.appendChild(el);
 
-    const travelY = -(window.innerHeight + Math.random() * 150 + 50);
-    const driftX = (Math.random() - 0.5) * 160;
-    const duration = Math.random() * 0.7 + 1.2;
-    const delay = Math.random() * 0.2;
+    const travelY = -(window.innerHeight + Math.random() * 180 + 80);
+    const driftX = (Math.random() - 0.5) * 180;
+    const duration = Math.random() * 0.8 + 1.3;
+    const delay = Math.random() * 0.35;
 
     gsap.timeline({ delay })
       .to(el, {
-        scale: Math.random() * 0.4 + 0.8,
+        scale: Math.random() * 0.5 + 0.8,
         opacity: 1,
-        duration: 0.2,
+        duration: 0.22,
         ease: "power1.out",
       })
       .to(el, {
         y: travelY,
         x: driftX,
-        rotation: (Math.random() - 0.5) * 120,
+        rotation: (Math.random() - 0.5) * 160,
         duration: duration,
         ease: "power1.out",
       }, 0)
       .to(el, {
         opacity: 0,
         scale: 0.2,
-        duration: 0.4,
-      }, duration - 0.4);
+        duration: 0.45,
+      }, duration - 0.45);
   }
 
   container.appendChild(fragment);
@@ -135,7 +136,7 @@ function triggerLoveCelebration(buttonRect?: DOMRect) {
 
   setTimeout(() => {
     container.remove();
-  }, 2200);
+  }, 2600);
 }
 
 interface Props {
